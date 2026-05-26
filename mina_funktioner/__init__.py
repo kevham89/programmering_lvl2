@@ -1,1 +1,1 @@
-from .utills import namn, pnamn
+from .utills import namn, pnamn, mydivision, myaddition, mymultiplication, mysubtraction
