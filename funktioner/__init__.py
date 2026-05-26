@@ -1,2 +1,1 @@
-from .utills import namn
-from .utills import pnamn
+from .utills import namn, pnamn
