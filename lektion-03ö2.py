@@ -1,5 +1,4 @@
 import os, csv
-
 def save_data(namn, betyg):
     MyFolder = "c:/Skola/Git-repo/programmering_lvl2/datalagring"
     MyPath = os.path.join(MyFolder, "lektion-03ö2data.csv")
@@ -10,7 +9,6 @@ def save_data(namn, betyg):
             FileWrite.writerow(["Namn", "Betyg"])
         FileWrite.writerow([namn, betyg])    
         print("Data Sparad!")
-
 def read_data():
     MyFolder = "c:/Skola/Git-repo/programmering_lvl2/datalagring"
     MyPath = os.path.join(MyFolder, "lektion-03ö2data.csv")
@@ -20,19 +18,18 @@ def read_data():
             print("Filen är tom.")
         else:
             print(MyContent)
-
 def insert_data():
     MyData = []
     try:
         antal = int(input("Hur många elever vill du registrera?: "))
     except ValueError:
         print("Fel värde, mata endast en siffra.")
+        return []
     for x in range(antal):
         namn = input("Ange elevnamn: ")
         betyg = input(f"Ange betyg för {namn}: ")
-        MyData.append([namn, betyg])
+        MyData.append({"namn": namn, "betyg": betyg})
     return MyData
-
 while True:
     print("1. Mata in data")
     print("2. Spara data till fil")
@@ -48,7 +45,7 @@ while True:
     elif val == 2:
         try:
             for elev in MyData:
-                save_data(elev[0], elev[1])
+                save_data(elev["namn"], elev["betyg"])
         except NameError:
             print("Det finns ingen data att spara.")
     elif val == 3:
@@ -57,4 +54,3 @@ while True:
         break
     else:
         print("Ange ett giltigt nummer.")
-
