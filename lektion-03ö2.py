@@ -1,14 +1,20 @@
+# -----------------------------------------------------------------
+# Library modules
+# -----------------------------------------------------------------
 import os, csv
-def save_data(namn, betyg):
+
+# -----------------------------------------------------------------
+# Funktioner
+# -----------------------------------------------------------------
+def save_data(fNamn, eNamn, Kurs, Betyg):
     MyFolder = "c:/Skola/Git-repo/programmering_lvl2/datalagring"
     MyPath = os.path.join(MyFolder, "lektion-03ö2data.csv")
     HeaderExists = os.path.exists(MyPath)
     with open(MyPath, "a", newline="", encoding="utf-8") as fil:
         FileWrite = csv.writer(fil)
         if not HeaderExists:
-            FileWrite.writerow(["Namn", "Betyg"])
-        FileWrite.writerow([namn, betyg])    
-        print("Data Sparad!")
+            FileWrite.writerow(["Förnamn", "Efternamn", "Kurs", "Betyg"])
+        FileWrite.writerow([fNamn, eNamn, Kurs, Betyg])    
 def read_data():
     MyFolder = "c:/Skola/Git-repo/programmering_lvl2/datalagring"
     MyPath = os.path.join(MyFolder, "lektion-03ö2data.csv")
@@ -26,28 +32,41 @@ def insert_data():
         print("Fel värde, mata endast en siffra.")
         return []
     for x in range(antal):
-        namn = input("Ange elevnamn: ")
-        betyg = input(f"Ange betyg för {namn}: ")
-        MyData.append({"namn": namn, "betyg": betyg})
+        fNamn = input("Ange förnamn: ").strip()
+        eNamn = input("Ange efternamn: ").strip()
+        Kurs = input("Ange Kurs: ").strip()
+        while True:
+            Betyg = input(f"Ange Betyg (A-F) för {fNamn} {eNamn} i {Kurs}: ").strip().upper()
+            if Betyg in ['A', 'B', 'C', 'D', 'E', 'F']:
+                break
+            print("Ogiltigt betyg: ")
+        MyData.append({"Förnamn": fNamn, "Efternamn": eNamn, "Kurs": Kurs, "Betyg": Betyg})
     return MyData
-while True:
+def nav():
     print("1. Mata in data")
     print("2. Spara data till fil")
     print("3. Läs data från fil")
     print("4. Avsluta")
     try:
         val = int(input("Gör ett val: "))
+        return val
     except ValueError:
         print("Ange ett giltigt nummer.")
-        continue
+        return None
+# -----------------------------------------------------------------
+# Huvudprogram
+# -----------------------------------------------------------------
+while True:
+    val = nav()
     if val == 1:
         MyData = insert_data()
     elif val == 2:
         try:
             for elev in MyData:
-                save_data(elev["namn"], elev["betyg"])
+                save_data(elev["Förnamn"], elev["Efternamn"], elev["Kurs"], elev["Betyg"])
         except NameError:
             print("Det finns ingen data att spara.")
+        print("Data Sparad!")
     elif val == 3:
         read_data()
     elif val == 4:
