@@ -45,13 +45,12 @@ class player:
 
 game1 = game(max_x=5, max_y=5, min_x=0, min_y=0, treasure_x=3, treasure_y=3)
 
-player1 = player("Kevin", player_posx=0, player_posy=0)
-player2 = player("Player2", player_posx=0, player_posy=0)
+player1 = player("1Player", player_posx=0, player_posy=0)
+player2 = player("2Player", player_posx=0, player_posy=0)
 
 current_player = player1
 while True:
     print(f"Nu spelar {current_player.name}")
-
     key = msvcrt.getch().decode('utf-8').lower()
     if key == "w":
         found = current_player.movement(0,1, game1)

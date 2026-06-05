@@ -1,4 +1,4 @@
-from mina_funktioner import myaddition, mymultiplication, mydivision, mysubtraction, namn, pnamn
+from MyFunctions import myaddition, mymultiplication, mydivision, mysubtraction, namn, pnamn
 
 user = namn()
 pnamn(user)

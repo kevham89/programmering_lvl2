@@ -1,4 +1,4 @@
-from mina_funktioner import namn, pnamn, pnummer, save_file, read_file
+from MyFunctions import namn, pnamn, pnummer, save_file, read_file
 while True:
     print("1. Ange data")
     print("2. Spara data")
